@@ -13,15 +13,15 @@ use Currency\Currency;
  * Money class.
  *
  * Most popular currency codes for autocomplete.
- * @method static Money USD($amount)
- * @method static Money EUR($amount)
- * @method static Money RUB($amount)
- * @method static Money JPY($amount)
- * @method static Money GBP($amount)
- * @method static Money CHF($amount)
- * @method static Money CAD($amount)
- * @method static Money AUD($amount)
- * @method static Money ZAR($amount)
+ * @method static Money USD($amount, $customMinorUnit = null)
+ * @method static Money EUR($amount, $customMinorUnit = null)
+ * @method static Money RUB($amount, $customMinorUnit = null)
+ * @method static Money JPY($amount, $customMinorUnit = null)
+ * @method static Money GBP($amount, $customMinorUnit = null)
+ * @method static Money CHF($amount, $customMinorUnit = null)
+ * @method static Money CAD($amount, $customMinorUnit = null)
+ * @method static Money AUD($amount, $customMinorUnit = null)
+ * @method static Money ZAR($amount, $customMinorUnit = null)
  */
 class Money implements \JsonSerializable
 {
@@ -79,8 +79,9 @@ class Money implements \JsonSerializable
     public static function __callStatic($currencyCode, $arguments)
     {
         $amount = isset($arguments[0]) ? $arguments[0] : 0;
+        $customMinorUnit = isset($arguments[1]) ? $arguments[1] : null;
 
-        return new self($amount, $currencyCode);
+        return new self($amount, $currencyCode, $customMinorUnit);
     }
 
     /**
