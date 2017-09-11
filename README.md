@@ -16,13 +16,13 @@ composer require fortis/moneyobject
 ## Use
 
 ``` php
+// Currency code validation.
+$money = new Money(100, 'USF');   // throws InvalidCurrencyException
+
 // Create Currency instance.
 $money = Money::USD(100);                       // 100 USD. Short syntax with autocomplete.
 $money = new Money(100, CurrencyCode::USD);     // 100 USD  
 $money = Money::create(100, CurrencyCode::USD); // 100 USD
-
-// Currency code validation.
-$money = new Money(100, 'USF');   // throws InvalidCurrencyException
 
 // Get currency.
 $money->getCurrency()->getCode(); // USD
