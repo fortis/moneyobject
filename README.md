@@ -17,7 +17,7 @@ composer require fortis/moneyobject
 
 ``` php
 // Currency code validation.
-$money = new Money(100, 'USF');   // throws InvalidCurrencyException
+$money = new Money(100, 'USF'); // throws InvalidCurrencyException
 
 // Create Currency instance.
 $money = Money::USD(100);                       // 100 USD. Short syntax with autocomplete.
@@ -31,16 +31,20 @@ $money->getCurrency()->getCode(); // USD
 $money->getAmount()->toFloat();   // 100
 
 // Multiply.
-$money->multiply(2)->getAmount()->toFloat(); // 200
+$money->multiply(2)
+      ->getAmount()->toFloat(); // 200
 
 // Divide.
-$money->divide(Money::USD(2))->getAmount()->toFloat(); // 50
+$money->divide(Money::USD(2))
+      ->getAmount()->toFloat(); // 50
 
 // Plus.
-$money->plus(Money::USD(2.5))->getAmount()->toFloat(); // 102.5
+$money->plus(Money::USD(2.5))
+      ->getAmount()->toFloat(); // 102.5
 
 // Minus.
-$money->minus(Money::USD(0.5))->getAmount()->toFloat(); // 99.5
+$money->minus(Money::USD(0.5))
+      ->getAmount()->toFloat(); // 99.5
 ```
 
 ## License
