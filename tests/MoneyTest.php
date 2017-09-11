@@ -92,4 +92,15 @@ class MoneyTest extends AbstractTestCase
         $money = Money::USD(100);
         $this->assertEquals(-100, $money->negate()->getAmount()->toFloat());
     }
+
+    public function testFloatRounding()
+    {
+        // Rounding problem.
+        $this->assertTrue((36 - 35.99) !== 0.01);
+
+        // Solution.
+        $first = Money::USD(36);
+        $second = Money::USD(35.99);
+        $this->assertEquals(0.01, $first->minus($second)->getAmount()->toFloat());
+    }
 }
