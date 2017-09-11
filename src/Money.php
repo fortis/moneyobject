@@ -265,6 +265,30 @@ class Money implements \JsonSerializable
     }
 
     /**
+     * Checks whether a Money has the same Currency as this.
+     *
+     * @param Money $that
+     *
+     * @return bool
+     */
+    public function isSameCurrency(Money $that)
+    {
+        return $this->currency->is($that->currency);
+    }
+
+    /**
+     * Checks whether the value represented by this object equals to the other.
+     *
+     * @param Money $other
+     *
+     * @return bool
+     */
+    public function equals(Money $other)
+    {
+        return $this->amount->isEqualTo($other->amount) && $this->isSameCurrency($other);
+    }
+
+    /**
      * Formats this Money with the given NumberFormatter.
      *
      * Note that NumberFormatter internally represents values using floating point arithmetic,

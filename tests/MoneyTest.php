@@ -60,7 +60,10 @@ class MoneyTest extends AbstractTestCase
         $this->assertEquals(11, $money->minus(Money::USD(0.5))->getAmount()->toFloat());
     }
 
-    public function testIsEqualTo()
+    public function testEquals()
     {
+        $money = Money::create(11.50, CurrencyCode::USD);
+        $other = Money::USD(11.5);
+        $this->assertTrue($money->equals($other));
     }
 }
