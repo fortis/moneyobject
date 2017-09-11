@@ -66,4 +66,30 @@ class MoneyTest extends AbstractTestCase
         $other = Money::USD(11.5);
         $this->assertTrue($money->equals($other));
     }
+
+    public function testJsonSerialize()
+    {
+        $money = Money::USD(11.5);
+        $json = json_encode($money);
+        $data = json_decode($json);
+        $this->assertTrue(Money::create($data->amount, $data->currency)->equals($money));
+    }
+
+    public function testZero()
+    {
+        $money = Money::zero(CurrencyCode::USD);
+        $this->assertEquals(0, $money->getAmount()->toFloat());
+    }
+
+    public function testAbs()
+    {
+        $money = Money::USD(-100);
+        $this->assertEquals(100, $money->abs()->getAmount()->toFloat());
+    }
+
+    public function testNegate()
+    {
+        $money = Money::USD(100);
+        $this->assertEquals(-100, $money->negate()->getAmount()->toFloat());
+    }
 }
