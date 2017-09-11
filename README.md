@@ -8,7 +8,7 @@ A PHP library providing immutable Money value object with arbitrary-precision an
 
 What do you think will be printed in the example below?
 ``` php
-print (36 - 35.99) === 0.1 ? '✅ equals' : 'not equals 😈';
+print (36 - 35.99) === 0.01 ? '✅ equals' : 'not equals 😈';
 ```
 Actually `not equals 😈` . You can try [https://ideone.com/2UQlBF](https://ideone.com/2UQlBF). 
 
