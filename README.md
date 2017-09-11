@@ -17,7 +17,7 @@ composer require fortis/moneyobject
 
 ``` php
 // Create Currency instance.
-$money = Money::USD(100);                       // 100 USD. Short syntax
+$money = Money::USD(100);                       // 100 USD. Short syntax with autocomplete.
 $money = new Money(100, CurrencyCode::USD);     // 100 USD  
 $money = Money::create(100, CurrencyCode::USD); // 100 USD
 
