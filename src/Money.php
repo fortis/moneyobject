@@ -96,8 +96,8 @@ class Money implements \JsonSerializable
      */
     public static function zero($currencyCode, $customMinorUnit = null)
     {
-        $currencyCode = Currency::create($currencyCode, $customMinorUnit);
-        $amount = BigDecimal::zero()->toScale($currencyCode->getMinorUnit());
+        $currency = Currency::create($currencyCode, $customMinorUnit);
+        $amount = BigDecimal::zero()->toScale($currency->getMinorUnit());
 
         return new self($amount, $currencyCode);
     }
