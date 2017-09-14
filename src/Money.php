@@ -8,6 +8,7 @@ use Brick\Math\Exception\ArithmeticException;
 use Brick\Math\Exception\RoundingNecessaryException;
 use Brick\Math\RoundingMode;
 use Currency\Currency;
+use Money\Exception\CurrencyMismatchException;
 
 /**
  * Money class.
@@ -54,7 +55,12 @@ class Money implements \JsonSerializable
      * @throws \InvalidArgumentException
      * @throws ArithmeticException
      */
-    public static function create($amount, $currencyCode, $customMinorUnit = null, $rounding = RoundingMode::UNNECESSARY) {
+    public static function create(
+        $amount,
+        $currencyCode,
+        $customMinorUnit = null,
+        $rounding = RoundingMode::UNNECESSARY
+    ) {
         return new self($amount, $currencyCode, $customMinorUnit, $rounding);
     }
 
@@ -96,6 +102,17 @@ class Money implements \JsonSerializable
         $amount = BigDecimal::zero()->toScale($currency->getMinorUnit());
 
         return new self($amount, $currencyCode);
+    }
+
+    /**
+     * @param Money $other
+     * @throws CurrencyMismatchException
+     */
+    private function assertCurrency(Money $other)
+    {
+        if (false === $this->isSameCurrency($other)) {
+            throw new CurrencyMismatchException($this->getCurrency(), $other->getCurrency());
+        }
     }
 
     /**
@@ -282,6 +299,66 @@ class Money implements \JsonSerializable
     public function equals(Money $other)
     {
         return $this->amount->isEqualTo($other->amount) && $this->isSameCurrency($other);
+    }
+
+    /**
+     * Returns whether this Money is less than the given amount
+     *
+     * @param Money|BigNumber|number|string $that
+     *
+     * @return bool
+     *
+     * @throws ArithmeticException       If the argument is an invalid number.
+     * @throws CurrencyMismatchException If the argument is a money in a different currency.
+     */
+    public function lessThan($that)
+    {
+        return $this->amount->isLessThan($that);
+    }
+
+    /**
+     * Returns whether this Money is less than or equal to the given amount.
+     *
+     * @param Money|BigNumber|number|string $that
+     *
+     * @return bool
+     *
+     * @throws ArithmeticException       If the argument is an invalid number.
+     * @throws CurrencyMismatchException If the argument is a money in a different currency.
+     */
+    public function lessThanOrEqual($that)
+    {
+        return $this->amount->isLessThanOrEqualTo($that);
+    }
+
+    /**
+     * Returns whether this Money is greater than the given amount.
+     *
+     * @param Money|BigNumber|number|string $that
+     *
+     * @return bool
+     *
+     * @throws ArithmeticException       If the argument is an invalid number.
+     * @throws CurrencyMismatchException If the argument is a money in a different currency.
+     */
+    public function greaterThan($that)
+    {
+        return $this->amount->isGreaterThan($that);
+    }
+
+    /**
+     * Returns whether this Money is greater than or equal to the given amount.
+     *
+     * @param Money|BigNumber|number|string $that
+     *
+     * @return bool
+     *
+     * @throws ArithmeticException       If the argument is an invalid number.
+     * @throws CurrencyMismatchException If the argument is a money in a different currency.
+     */
+    public function greaterThanOrEqual($that)
+    {
+        return $this->amount->isGreaterThanOrEqualTo($that);
     }
 
     /**
