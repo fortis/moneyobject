@@ -54,12 +54,7 @@ class Money implements \JsonSerializable
      * @throws \InvalidArgumentException
      * @throws ArithmeticException
      */
-    public static function create(
-        $amount,
-        $currencyCode,
-        $customMinorUnit = null,
-        $rounding = RoundingMode::UNNECESSARY
-    ) {
+    public static function create($amount, $currencyCode, $customMinorUnit = null, $rounding = RoundingMode::UNNECESSARY) {
         return new self($amount, $currencyCode, $customMinorUnit, $rounding);
     }
 
@@ -333,7 +328,8 @@ class Money implements \JsonSerializable
     }
 
     /**
-     * @inheritdoc
+     * Serialize money.
+     *
      * @return array
      */
     public function jsonSerialize()
