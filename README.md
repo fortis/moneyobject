@@ -1,6 +1,7 @@
 # moneyobject
 
 [![Travis](https://img.shields.io/travis/fortis/moneyobject.svg?branch=master)](https://travis-ci.org/fortis/moneyobject)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/fortis/moneyobject/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/fortis/moneyobject/?branch=master)
 [![Coveralls](https://img.shields.io/coveralls/fortis/moneyobject/master.svg)](https://coveralls.io/github/fortis/moneyobject?branch=master)
 [![Packagist](https://img.shields.io/packagist/l/fortis/moneyobject.svg)](https://packagist.org/packages/fortis/moneyobject)
 
