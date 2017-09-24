@@ -63,6 +63,16 @@ Money::USD(36)->minus(Money::USD(35.99))
 // Minus: 36 - 35.99        
 Money::USD(36)->minus(35.99)
               ->getAmount()->toFloat(); // 0.01
+              
+// Convert USD to EUR
+$swap = (new Builder())
+    ->add('fixer')
+    ->build();
+$exchange = new SwapExchange($swap);
+$converter = new Converter($exchange);
+$usd50 = Money::USD(50);
+$result = $converter->convert($usd50, Currency::EUR());
+
 ```
 
 ## License
