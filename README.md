@@ -25,46 +25,66 @@ composer require fortis/moneyobject
 
 ## Use
 
+#### Currency code validation
 ``` php
-// Currency code validation.
 $money = new Money(100, 'USF'); // throws InvalidCurrencyException
+```
 
-// Create Money instance.
+#### Create Money instance
+``` php
 $money = Money::USD(100.20);                       // 100.20 USD. Short syntax with autocomplete.
 $money = new Money(100.20, CurrencyCode::USD);     // 100.20 USD  
 $money = Money::create(100.20, CurrencyCode::USD); // 100.20 USD
+```
 
-// Get currency.
+#### Get currency
+``` php
 $money->getCurrency()->getCode(); // USD
+```
 
-// Get amount.
+#### Get amount
+``` php
 $money->getAmount()->toFloat();   // 100.20
+```
 
-// Multiply: 100.20 * 2
+#### Multiply: 100.20 * 2
+``` php
 $money->multiply(2)
       ->getAmount()->toFloat(); // 200.40
+```
 
-// Divide: 100.20 / 2
+#### Divide: 100.20 / 2
+``` php
 $money->divide(Money::USD(2))
       ->getAmount()->toFloat(); // 50.10
+```
 
-// Plus: 100.20 + 2.5
+#### Plus: 100.20 + 2.5
+``` php
 $money->plus(Money::USD(2.5))
       ->getAmount()->toFloat(); // 102.70
+```
 
-// Minus: 100.20 - 0.5
+#### Minus: 100.20 - 0.5
+``` php
 $money->minus(Money::USD(0.5))
       ->getAmount()->toFloat(); // 99.70
+```
 
-// Minus: 36 - 35.99      
+#### Minus: 36 - 35.99      
+``` php
 Money::USD(36)->minus(Money::USD(35.99))
               ->getAmount()->toFloat(); // 0.01
+```
 
-// Minus: 36 - 35.99        
+#### Minus: 36 - 35.99        
+``` php
 Money::USD(36)->minus(35.99)
               ->getAmount()->toFloat(); // 0.01
-              
-// Convert USD to EUR
+```
+
+#### Convert USD to EUR
+``` php
 $swap = (new Builder())
     ->add('fixer')
     ->build();
@@ -72,7 +92,6 @@ $exchange = new SwapExchange($swap);
 $converter = new Converter($exchange);
 $usd50 = Money::USD(50);
 $result = $converter->convert($usd50, Currency::EUR());
-
 ```
 
 ## License
