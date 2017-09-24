@@ -2,7 +2,6 @@
 
 namespace Money;
 
-
 use Currency\Currency;
 use Money\Exception\MoneyException;
 
