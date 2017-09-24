@@ -42,3 +42,8 @@ tools:
         filter:
             paths: ["src/*", "tests/*"]
     sensiolabs_security_checker: true
+
+checks:
+    php:
+        code_rating: true
+        duplication: true
