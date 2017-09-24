@@ -22,7 +22,11 @@ class SwapExchange
     }
 
     /**
-     * {@inheritdoc}
+     * Quotes a currency pair.
+     *
+     * @param \Currency\Currency $baseCurrency
+     * @param \Currency\Currency $quoteCurrency
+     * @return \Exchanger\ExchangeRate
      * @throws \Money\ExchangeException
      */
     public function quote(Currency $baseCurrency, Currency $quoteCurrency)
