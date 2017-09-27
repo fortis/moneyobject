@@ -12,7 +12,7 @@ class CurrencyMismatchException extends MoneyException
      *
      * @return CurrencyMismatchException
      */
-    public static function currencyMismatch(Currency $expected, Currency $actual)
+    public static function createFromCurrencies(Currency $expected, Currency $actual)
     {
         return new self(
             sprintf(

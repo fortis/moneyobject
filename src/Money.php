@@ -111,7 +111,7 @@ class Money implements \JsonSerializable
     private function assertCurrency(Money $other)
     {
         if (false === $this->isSameCurrency($other)) {
-            throw new CurrencyMismatchException($this->getCurrency(), $other->getCurrency());
+            throw CurrencyMismatchException::createFromCurrencies($this->getCurrency(), $other->getCurrency());
         }
     }
 
