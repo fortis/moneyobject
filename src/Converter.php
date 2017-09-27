@@ -6,17 +6,17 @@ use Currency\Currency;
 
 class Converter
 {
-    /**
-     * @var SwapExchange
-     */
-    private $exchange;
+    /** @var ExchangeRatesProvider */
+    private $ratesProvider;
 
     /**
-     * @param SwapExchange $exchange
+     * Converter constructor.
+     *
+     * @param \Money\ExchangeRatesProvider $exchanger
      */
-    public function __construct(SwapExchange $exchange)
+    public function __construct(ExchangeRatesProvider $exchanger)
     {
-        $this->exchange = $exchange;
+        $this->ratesProvider = $exchanger;
     }
 
     /**
@@ -34,8 +34,14 @@ class Converter
         $baseCurrencySubunit = $baseCurrency->getMinorUnit();
         $counterCurrencySubunit = $counterCurrency->getMinorUnit();
         $subunitDifference = $baseCurrencySubunit - $counterCurrencySubunit;
+        $pair = $baseCurrency->getCode().'/'.$counterCurrency->getCode();
 
-        $ratio = $this->exchange->quote($baseCurrency, $counterCurrency)->getValue();
+        try {
+            $ratio = $this->ratesProvider->quote($pair);
+        } catch (\Exception $e) {
+            throw ExchangeException::createFromCurrencies($baseCurrency, $counterCurrency);
+        }
+
         $ratio /= 10 ** $subunitDifference;
         $counterValue = $money->getAmount()->multipliedBy($ratio);
 
