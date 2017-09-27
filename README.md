@@ -24,7 +24,7 @@ Install directly from command line using Composer
 composer require fortis/moneyobject
 ```
 
-## Use
+## QuickStart
 
 #### Currency code validation
 ``` php
@@ -85,15 +85,23 @@ Money::USD(36)->minus(35.99)
 ```
 
 #### Convert USD to EUR
+```bash
+$ composer require florianv/swap php-http/message php-http/guzzle6-adapter
+```
+
 ``` php
-$swap = (new Builder())
+$swap = (new SwapBuilder())
     ->add('fixer')
     ->build();
-$exchange = new SwapExchange($swap);
-$converter = new Converter($exchange);
+$converter = new Converter($swap);
 $usd50 = Money::USD(50);
 $result = $converter->convert($usd50, Currency::EUR());
 ```
+
+## Credits
+
+- [Florian Voutzinos](https://github.com/florianv)
+
 
 ## License
 
