@@ -47,10 +47,10 @@ class Money implements \JsonSerializable
     }
 
     /**
-     * @param string $amount
-     * @param string $currencyCode
-     * @param null   $customMinorUnit
-     * @param int    $rounding
+     * @param string   $amount
+     * @param string   $currencyCode
+     * @param int|null $customMinorUnit
+     * @param int      $rounding
      * @return Money
      * @throws \InvalidArgumentException
      * @throws ArithmeticException
