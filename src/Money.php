@@ -35,7 +35,7 @@ class Money implements \JsonSerializable
     /**
      * @param BigNumber|number|string $amount       The amount.
      * @param string                  $currencyCode The currency code.
-     * @param int|null                    $customMinorUnit
+     * @param int|null                $customMinorUnit
      * @param int                     $rounding
      * @throws \InvalidArgumentException
      * @throws ArithmeticException
