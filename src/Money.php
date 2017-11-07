@@ -313,7 +313,9 @@ class Money implements \JsonSerializable
      */
     public function lessThan($that)
     {
-        return $this->amount->isLessThan($that);
+        $amount = $that instanceof Money ? $that->getAmount() : $that;
+
+        return $this->amount->isLessThan($amount);
     }
 
     /**
@@ -328,7 +330,9 @@ class Money implements \JsonSerializable
      */
     public function lessThanOrEqual($that)
     {
-        return $this->amount->isLessThanOrEqualTo($that);
+        $amount = $that instanceof Money ? $that->getAmount() : $that;
+
+        return $this->amount->isLessThanOrEqualTo($amount);
     }
 
     /**
@@ -343,7 +347,9 @@ class Money implements \JsonSerializable
      */
     public function greaterThan($that)
     {
-        return $this->amount->isGreaterThan($that);
+        $amount = $that instanceof Money ? $that->getAmount() : $that;
+
+        return $this->amount->isGreaterThan($amount);
     }
 
     /**
@@ -358,7 +364,9 @@ class Money implements \JsonSerializable
      */
     public function greaterThanOrEqual($that)
     {
-        return $this->amount->isGreaterThanOrEqualTo($that);
+        $amount = $that instanceof Money ? $that->getAmount() : $that;
+
+        return $this->amount->isGreaterThanOrEqualTo($amount);
     }
 
     /**
