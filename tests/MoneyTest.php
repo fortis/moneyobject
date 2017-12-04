@@ -2,6 +2,7 @@
 
 namespace Money\Tests;
 
+use Brick\Math\RoundingMode;
 use Brick\Math\Tests\AbstractTestCase;
 use Currency\Currency;
 use Currency\CurrencyCode;
@@ -40,6 +41,15 @@ class MoneyTest extends AbstractTestCase
 
         $money = Money::create(11.50, CurrencyCode::USD);
         $this->assertEquals(23, $money->multiply(Money::USD(2))->getAmount()->toFloat());
+
+        $money = Money::create(11.50, CurrencyCode::USD);
+        $this->assertEquals(
+            26,
+            $money->multiply(2.2)
+                  ->getAmount()
+                  ->toScale(0, RoundingMode::CEILING)
+                  ->toInteger()
+        );
     }
 
     public function testDivide()
