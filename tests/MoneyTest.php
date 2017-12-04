@@ -23,7 +23,7 @@ class MoneyTest extends AbstractTestCase
 
     public function testAmountToFloat()
     {
-        $money = Money::create(11.50, 'USD', 2);
+        $money = Money::create(11.50, CurrencyCode::USD, 2);
         $this->assertEquals(11.50, $money->getAmount()->toFloat());
     }
 
@@ -31,7 +31,7 @@ class MoneyTest extends AbstractTestCase
     {
         $money = Money::EUR(5.5);
         $this->assertEquals(5.5, $money->getAmount()->toFloat());
-        $this->assertEquals('EUR', $money->getCurrency());
+        $this->assertEquals(CurrencyCode::EUR, $money->getCurrency());
     }
 
     public function testMultiply()
