@@ -214,16 +214,15 @@ class Money implements \JsonSerializable
      * the multiplied value by the given factor.
      *
      * @param $that
+     * @param int $rounding
      * @return Money
-     * @throws \InvalidArgumentException
-     * @throws ArithmeticException
      */
-    public function multiply($that)
+    public function multiply($that, $rounding = RoundingMode::UNNECESSARY)
     {
         $multiplier = $that instanceof Money ? $that->getAmount() : $that;
         $amount = $this->amount->multipliedBy($multiplier);
 
-        return new self($amount, $this->currency->getCode());
+        return new self($amount, $this->currency->getCode(), $this->getCurrency()->getMinorUnit(), $rounding);
     }
 
     /**
@@ -231,16 +230,15 @@ class Money implements \JsonSerializable
      * the divided value by the given factor.
      *
      * @param $that
+     * @param int $rounding
      * @return Money
-     * @throws \InvalidArgumentException
-     * @throws ArithmeticException
      */
-    public function divide($that)
+    public function divide($that, $rounding = RoundingMode::UNNECESSARY)
     {
         $divisor = $that instanceof Money ? $that->getAmount() : $that;
         $amount = $this->amount->dividedBy($divisor);
 
-        return new self($amount, $this->currency->getCode());
+        return new self($amount, $this->currency->getCode(), $this->getCurrency()->getMinorUnit(), $rounding);
     }
 
     /**
