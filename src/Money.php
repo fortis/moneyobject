@@ -81,8 +81,9 @@ class Money implements \JsonSerializable
     {
         $amount = isset($arguments[0]) ? $arguments[0] : 0;
         $customMinorUnit = isset($arguments[1]) ? $arguments[1] : null;
+        $rounding = isset($arguments[2]) ? $arguments[2] : RoundingMode::UNNECESSARY;
 
-        return new self($amount, $currencyCode, $customMinorUnit);
+        return new self($amount, $currencyCode, $customMinorUnit, $rounding);
     }
 
     /**
@@ -236,7 +237,7 @@ class Money implements \JsonSerializable
     public function divide($that, $rounding = RoundingMode::UNNECESSARY)
     {
         $divisor = $that instanceof Money ? $that->getAmount() : $that;
-        $amount = $this->amount->dividedBy($divisor);
+        $amount = $this->amount->dividedBy($divisor, $this->getAmount()->scale(), $rounding);
 
         return new self($amount, $this->currency->getCode(), $this->getCurrency()->getMinorUnit(), $rounding);
     }
@@ -255,7 +256,7 @@ class Money implements \JsonSerializable
         $addend = $that instanceof Money ? $that->getAmount() : $that;
         $amount = $this->amount->plus($addend);
 
-        return new self($amount, $this->currency->getCode());
+        return new self($amount, $this->currency->getCode(), $this->getCurrency()->getMinorUnit());
     }
 
     /**
@@ -272,7 +273,7 @@ class Money implements \JsonSerializable
         $subtrahend = $that instanceof Money ? $that->getAmount() : $that;
         $amount = $this->amount->minus($subtrahend);
 
-        return new self($amount, $this->currency->getCode());
+        return new self($amount, $this->currency->getCode(), $this->getCurrency()->getMinorUnit());
     }
 
     /**

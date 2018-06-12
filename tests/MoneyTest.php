@@ -46,9 +46,9 @@ class MoneyTest extends AbstractTestCase
         $this->assertEquals(
             26,
             $money->multiply(2.2)
-                  ->getAmount()
-                  ->toScale(0, RoundingMode::CEILING)
-                  ->toInteger()
+                ->getAmount()
+                ->toScale(0, RoundingMode::CEILING)
+                ->toInteger()
         );
     }
 
@@ -112,5 +112,12 @@ class MoneyTest extends AbstractTestCase
         $first = Money::USD(36);
         $second = Money::USD(35.99);
         $this->assertEquals(0.01, $first->minus($second)->getAmount()->toFloat());
+    }
+
+    public function testRoundingIsNecessary()
+    {
+        $this->assertInstanceOf(Money::class, Money::RUB(204.08037037037 / 0.80, null, RoundingMode::FLOOR));
+        $this->assertInstanceOf(Money::class, Money::RUB(6146.68)->divide(20, RoundingMode::FLOOR));
+        $this->assertInstanceOf(Money::class, Money::RUB(6146.68)->plus(20));
     }
 }
