@@ -3,22 +3,32 @@
 namespace Money\Tests;
 
 use Brick\Math\RoundingMode;
-use Brick\Math\Tests\AbstractTestCase;
 use Currency\Currency;
 use Currency\CurrencyCode;
 use Money\Money;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class Money.
  */
-class MoneyTest extends AbstractTestCase
+class MoneyTest extends TestCase
 {
-    public function testCreate()
+    /**
+     * @dataProvider createDataProvider
+     */
+    public function testCreate($expectedInstance, $resultInstance)
     {
-        $this->assertInstanceOf(Money::class, Money::create(11.50, 'USD', 2));
-        $this->assertInstanceOf(Money::class, Money::create(4, CurrencyCode::USD));
-        $this->assertInstanceOf(Currency::class, Money::create(11.50, 'USD', 2)->getCurrency());
-        $this->assertInstanceOf(Money::class, Money::USD(2));
+        $this->assertInstanceOf($expectedInstance, $resultInstance);
+    }
+
+    public function createDataProvider()
+    {
+        return [
+            [Money::class, Money::create(11.50, 'USD', 2)],
+            [Money::class, Money::create(4, CurrencyCode::USD)],
+            [Currency::class, Money::create(11.50, 'USD', 2)->getCurrency()],
+            [Money::class, Money::USD(2)],  
+        ];
     }
 
     public function testAmountToFloat()
@@ -91,6 +101,12 @@ class MoneyTest extends AbstractTestCase
         $this->assertEquals(0, $money->getAmount()->toFloat());
     }
 
+    public function testIsZero()
+    {
+        $money = Money::zero(CurrencyCode::USD);
+        $this->assertTrue($money->isZero());
+    }
+
     public function testAbs()
     {
         $money = Money::USD(-100);
@@ -101,6 +117,76 @@ class MoneyTest extends AbstractTestCase
     {
         $money = Money::USD(100);
         $this->assertEquals(-100, $money->negate()->getAmount()->toFloat());
+    }
+
+    public function testIsPositive()
+    {
+        $money = Money::USD(100);
+        $this->assertTrue($money->isPositive());
+    }
+
+    public function testIsPositiveOrZero()
+    {
+        $money = Money::USD(100);
+        $this->assertTrue($money->isPositiveOrZero());
+    }
+
+    public function testIsNegative()
+    {
+        $money = Money::USD(100);
+        $money->negate();
+        $this->assertFalse($money->isNegative());
+    }
+
+    public function testIsNegativeOrZero()
+    {
+        $money = Money::USD(100);
+        $money->negate();
+        $this->assertFalse($money->isNegativeOrZero());
+    }
+
+    public function testLessThan()
+    {
+        $money = Money::USD(100);
+        $this->assertFalse($money->lessThan(10));
+    }
+
+    public function testLessThanOrEqual()
+    {
+        $money = Money::USD(100);
+        $this->assertTrue($money->lessThanOrEqual(100));
+    }
+
+    public function testGreaterThan()
+    {
+        $money = Money::USD(100);
+        $this->assertFalse($money->greaterThan(1000));
+    }
+
+    public function testGreaterThanOrEqual()
+    {
+        $money = Money::USD(100);
+        $this->assertTrue($money->greaterThanOrEqual(100));
+    }
+
+    public function testFormatWith()
+    {
+        $numberFormatter = new \NumberFormatter('en', \NumberFormatter::SPELLOUT);
+        $money = Money::USD(100);
+        $this->assertEquals('one hundred', $money->formatWith($numberFormatter));
+    }
+
+    public function testFormatTo()
+    {
+        $numberFormatter = new \NumberFormatter('en', \NumberFormatter::SPELLOUT);
+        $money = Money::USD(100);
+        $this->assertEquals('$100.00', $money->formatTo('en'));
+    }
+
+    public function testToString()
+    {
+        $money = Money::USD(100);
+        $this->assertEquals('USD 100.00', (string)$money);
     }
 
     public function testFloatRounding()
@@ -114,10 +200,20 @@ class MoneyTest extends AbstractTestCase
         $this->assertEquals(0.01, $first->minus($second)->getAmount()->toFloat());
     }
 
-    public function testRoundingIsNecessary()
+    /**
+     * @dataProvider roundingDataProvider
+     */
+    public function testRoundingIsNecessary($expectedInstance, $resultInstance)
     {
-        $this->assertInstanceOf(Money::class, Money::RUB(204.08037037037 / 0.80, null, RoundingMode::FLOOR));
-        $this->assertInstanceOf(Money::class, Money::RUB(6146.68)->divide(20, RoundingMode::FLOOR));
-        $this->assertInstanceOf(Money::class, Money::RUB(6146.68)->plus(20));
+        $this->assertInstanceOf($expectedInstance, $resultInstance);
+    }
+
+    public function roundingDataProvider()
+    {
+        return [
+            [Money::class, Money::RUB(204.08037037037 / 0.80, null, RoundingMode::FLOOR)],
+            [Money::class, Money::RUB(6146.68)->divide(20, RoundingMode::FLOOR)],
+            [Money::class, Money::RUB(6146.68)->plus(20)],
+        ];
     }
 }
