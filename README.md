@@ -4,6 +4,7 @@
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/fortis/moneyobject/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/fortis/moneyobject/?branch=master)
 [![Coveralls](https://img.shields.io/coveralls/fortis/moneyobject/master.svg)](https://coveralls.io/github/fortis/moneyobject?branch=master)
 [![Packagist](https://img.shields.io/packagist/l/fortis/moneyobject.svg)](https://packagist.org/packages/fortis/moneyobject)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Ffortis%2Fmoneyobject.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Ffortis%2Fmoneyobject?ref=badge_shield)
 
 A PHP library providing immutable Money value object with arbitrary-precision and solution for floating point rounding errors.
 
@@ -106,3 +107,6 @@ $result = $converter->convert($usd50, Currency::EUR());
 ## License
 
 moneyobject is licensed under the MIT license.
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Ffortis%2Fmoneyobject.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Ffortis%2Fmoneyobject?ref=badge_large)
