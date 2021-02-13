@@ -3,7 +3,6 @@
 namespace Money\Exception;
 
 use Currency\Currency;
-use Money\Exception\MoneyException;
 
 class ExchangeException extends MoneyException
 {

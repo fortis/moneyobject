@@ -3,6 +3,7 @@
 namespace Money;
 
 use Currency\Currency;
+use Money\Exception\ExchangeException;
 
 class Converter
 {
@@ -20,13 +21,11 @@ class Converter
     }
 
     /**
-     * @param Money    $money
+     * @param Money $money
      * @param Currency $counterCurrency
      *
      * @return Money
-     * @throws \Money\ExchangeException
-     * @throws \InvalidArgumentException
-     * @throws \Brick\Math\Exception\ArithmeticException
+     * @throws ExchangeException
      */
     public function convert(Money $money, Currency $counterCurrency)
     {
