@@ -58,7 +58,7 @@ class MoneyTest extends TestCase
             $money->multiply(2.2)
                 ->getAmount()
                 ->toScale(0, RoundingMode::CEILING)
-                ->toInteger()
+                ->toInt()
         );
     }
 

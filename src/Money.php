@@ -237,7 +237,7 @@ class Money implements \JsonSerializable
     public function divide($that, $rounding = RoundingMode::UNNECESSARY)
     {
         $divisor = $that instanceof Money ? $that->getAmount() : $that;
-        $amount = $this->amount->dividedBy($divisor, $this->getAmount()->scale(), $rounding);
+        $amount = $this->amount->dividedBy($divisor, $this->getAmount()->getScale(), $rounding);
 
         return new self($amount, $this->currency->getCode(), $this->getCurrency()->getMinorUnit(), $rounding);
     }

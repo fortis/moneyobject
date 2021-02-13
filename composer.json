@@ -16,8 +16,7 @@
         "fortis/iso-currency": "^1.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^6.5.14",
-        "satooshi/php-coveralls": "v1.1.0"
+        "phpunit/phpunit": "9.5.2"
     },
     "autoload": {
         "psr-4": {
