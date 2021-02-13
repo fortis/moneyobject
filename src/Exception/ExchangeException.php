@@ -1,6 +1,6 @@
 <?php
 
-namespace Money;
+namespace Money\Exception;
 
 use Currency\Currency;
 use Money\Exception\MoneyException;
