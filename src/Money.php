@@ -14,15 +14,15 @@ use Money\Exception\CurrencyMismatchException;
  * Money class.
  *
  * Most popular currency codes for autocomplete.
- * @method static Money USD($amount, $customMinorUnit = null)
- * @method static Money EUR($amount, $customMinorUnit = null)
- * @method static Money RUB($amount, $customMinorUnit = null)
- * @method static Money JPY($amount, $customMinorUnit = null)
- * @method static Money GBP($amount, $customMinorUnit = null)
- * @method static Money CHF($amount, $customMinorUnit = null)
- * @method static Money CAD($amount, $customMinorUnit = null)
- * @method static Money AUD($amount, $customMinorUnit = null)
- * @method static Money ZAR($amount, $customMinorUnit = null)
+ * @method static Money USD($amount, $customMinorUnit = null, $rounding = RoundingMode::UNNECESSARY)
+ * @method static Money EUR($amount, $customMinorUnit = null, $rounding = RoundingMode::UNNECESSARY)
+ * @method static Money RUB($amount, $customMinorUnit = null, $rounding = RoundingMode::UNNECESSARY)
+ * @method static Money JPY($amount, $customMinorUnit = null, $rounding = RoundingMode::UNNECESSARY)
+ * @method static Money GBP($amount, $customMinorUnit = null, $rounding = RoundingMode::UNNECESSARY)
+ * @method static Money CHF($amount, $customMinorUnit = null, $rounding = RoundingMode::UNNECESSARY)
+ * @method static Money CAD($amount, $customMinorUnit = null, $rounding = RoundingMode::UNNECESSARY)
+ * @method static Money AUD($amount, $customMinorUnit = null, $rounding = RoundingMode::UNNECESSARY)
+ * @method static Money ZAR($amount, $customMinorUnit = null, $rounding = RoundingMode::UNNECESSARY)
  */
 class Money implements \JsonSerializable
 {
